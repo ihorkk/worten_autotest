@@ -23,7 +23,7 @@ acceptcookies = WebDriverWait(driver, 10).until(
         By.CSS_SELECTOR, "button[class*=w-button-primary]"))).click()
 
 # Navigation menu test
-actualresult_list = ['Diretório de Categorias',
+expectedresult_list = ['Diretório de Categorias',
                      'Promoções',
                      'Novidades Tecnológicas',
                      'Serviços Worten Resolve',
@@ -31,13 +31,13 @@ actualresult_list = ['Diretório de Categorias',
                      'Lojas',
                      'Outlet',
                      'Worten Business | Worten para Empresas e Negócios']
-actualresult_check = []
+actualresult_list = []
 for indx in range(8):
     button1 = WebDriverWait(driver, 10).until(
         EC.visibility_of_all_elements_located((By.CSS_SELECTOR, "li[class*=nav-item-first]")))
     button1[indx].click()
     actualresult = WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, "[class*=w-breadcrumbs__text-big-name]"))).text
-    actualresult_check.append(actualresult)
-assert actualresult_list == actualresult_check, f"Names do not match \nActualResult is: {actualresult_check}"
+    actualresult_list.append(actualresult)
+assert expectedresult_list == actualresult_list, f"Names do not match \nActualResult is: {actualresult_list}"
 driver.quit()
